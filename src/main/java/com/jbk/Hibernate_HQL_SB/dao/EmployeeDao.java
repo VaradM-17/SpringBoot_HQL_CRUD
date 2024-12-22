@@ -131,5 +131,29 @@ public class EmployeeDao {
         return list;
     }
 
-    
+    public Employee fetchsingleData(int eid) {
+        Session ss = null;
+        Transaction tx = null;
+        Employee emp = null;
+
+        try {
+            ss = factory.openSession();
+            tx = ss.beginTransaction();
+            String hqlQuery = "FROM Employee WHERE eid = :myid";
+            Query<Employee> query = ss.createQuery(hqlQuery, Employee.class);
+            query.setParameter("myid", eid);
+            emp = query.uniqueResult();
+            tx.commit();
+        } catch (Exception ex) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            if (ss != null) {
+                ss.close();
+            }
+        }
+        return emp;
+    }
 }
