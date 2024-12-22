@@ -23,5 +23,10 @@ public class EmployeeService {
         return employeeDao.updateData(employee, eid); 
     }
 
+    public String deleteData(int eid) 
+    {
+        return employeeDao.deleteData(eid); 
+    }
+
     
 }
