@@ -27,5 +27,11 @@ public class EmployeeController {
         return msg;
     }
 
+    @PutMapping("/updatedata/{eid}")
+    public String updateData(@RequestBody Employee e, @PathVariable int eid) {
+        String msg = employeeservice.updateData(e, eid);
+        return msg;
+    }
+
     
 }
