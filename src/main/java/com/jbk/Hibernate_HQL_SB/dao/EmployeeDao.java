@@ -106,5 +106,30 @@ public class EmployeeDao {
         return msg;
     }
 
-   
+    public List<Employee> displayallData() {
+        Session ss = null;
+        Transaction tx = null;
+        List<Employee> list = null;
+
+        try {
+            ss = factory.openSession();
+            tx = ss.beginTransaction();
+            String hqlQuery = "FROM Employee";
+            Query<Employee> query = ss.createQuery(hqlQuery, Employee.class);
+            list = query.list();
+            tx.commit();
+        } catch (Exception ex) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            if (ss != null) {
+                ss.close();
+            }
+        }
+        return list;
+    }
+
+    
 }
