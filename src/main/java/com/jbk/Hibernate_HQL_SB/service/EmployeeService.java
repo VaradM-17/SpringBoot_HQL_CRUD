@@ -33,5 +33,8 @@ public class EmployeeService {
         return employeeDao.displayallData(); 
     }
 
-   
+    public Employee fetchSingleData(int eid) 
+    {
+        return employeeDao.fetchsingleData(eid); 
+    }
 }
