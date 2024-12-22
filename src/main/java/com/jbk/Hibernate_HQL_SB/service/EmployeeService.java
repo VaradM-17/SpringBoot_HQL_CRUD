@@ -28,5 +28,10 @@ public class EmployeeService {
         return employeeDao.deleteData(eid); 
     }
 
-    
+    public List<Employee> displayAllData() 
+    {
+        return employeeDao.displayallData(); 
+    }
+
+   
 }
