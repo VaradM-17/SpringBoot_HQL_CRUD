@@ -41,5 +41,39 @@ public class EmployeeDao {
         return msg;
     }
 
+    public String updateData(Employee e, int eid) {
+        Session ss = null;
+        Transaction tx = null;
+        String msg = null;
+
+        try {
+            ss = factory.openSession();
+            tx = ss.beginTransaction();
+            String hql = "UPDATE Employee SET ename = :ename, eage = :eage, esalary = :esalary WHERE eid = :eid";
+            Query<Employee> query = ss.createQuery(hql,Employee.class);
+            query.setParameter("ename", e.getEname());
+            query.setParameter("eage", e.getEage());
+            query.setParameter("esalary", e.getEsalary());
+            query.setParameter("eid", eid);
+            int result = query.executeUpdate();
+            tx.commit();
+            if (result > 0) {
+                msg = "Data Successfully Updated...";
+            } else {
+                msg = "No Data Found for Update...";
+            }
+        } catch (Exception ex) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            if (ss != null) {
+                ss.close();
+            }
+        }
+        return msg;
+    }
+
     
 }
