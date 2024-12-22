@@ -33,5 +33,11 @@ public class EmployeeController {
         return msg;
     }
 
-    
+    @DeleteMapping("/deletedata/{eid}")
+    public String deletedata(@PathVariable int eid) {
+        String msg = employeeservice.deleteData(eid);
+        return msg;
+    }
+
+   
 }
