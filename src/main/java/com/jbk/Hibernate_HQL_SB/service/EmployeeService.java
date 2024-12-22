@@ -18,5 +18,10 @@ public class EmployeeService {
         return employeeDao.insertData(employee); 
     }
 
-   
+    public String updateData(Employee employee, int eid) 
+    {
+        return employeeDao.updateData(employee, eid); 
+    }
+
+    
 }
