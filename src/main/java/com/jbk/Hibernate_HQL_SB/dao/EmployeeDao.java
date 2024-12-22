@@ -75,5 +75,36 @@ public class EmployeeDao {
         return msg;
     }
 
-    
+    public String deleteData(int eid) {
+        Session ss = null;
+        Transaction tx = null;
+        String msg = null;
+
+        try {
+            ss = factory.openSession();
+            tx = ss.beginTransaction();
+            String hql = "DELETE FROM Employee WHERE eid = :eid";
+            Query<Employee> query = ss.createQuery(hql,Employee.class);
+            query.setParameter("eid", eid);
+            int result = query.executeUpdate();
+            tx.commit();
+            if (result > 0) {
+                msg = "Data Successfully Deleted...";
+            } else {
+                msg = "No Data Found to Delete...";
+            }
+        } catch (Exception ex) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            if (ss != null) {
+                ss.close();
+            }
+        }
+        return msg;
+    }
+
+   
 }
