@@ -39,5 +39,15 @@ public class EmployeeController {
         return msg;
     }
 
-   
+    @GetMapping("/displayalldata")
+    public List<Employee> displayallData() {
+        List<Employee> list = employeeservice.displayAllData();
+        return list;
+    }
+
+    @GetMapping("/displaysingledata/{eid}")
+    public Employee fetchsingleData(@PathVariable int eid) {
+        Employee e = employeeservice.fetchSingleData(eid);
+        return e;
+    }
 }
